@@ -25,12 +25,12 @@ var infoLog *log.Logger
 var errorLog *log.Logger
 
 func main() {
-	db, err := run()
+	_, err := run()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	defer db.SQL.Close()
+	// defer db.SQL.Close()
 
 	fmt.Printf("Starting application on port: %s\n", portNumber)
 
@@ -73,11 +73,11 @@ func run() (*driver.DB, error) {
 
 	log.Println("Connected to database")
 
-	defer db.SQL.Close()
+	// defer db.SQL.Close()
 
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
-		log.Fatal("cannot create template cache")
+		log.Fatal("cannot create template cache", err)
 
 		return nil, err
 	}
